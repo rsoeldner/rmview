@@ -320,8 +320,8 @@ class rMViewApp(QApplication):
           log.warning("Detected version 2.7 or 2.8. The server might not work with these versions.")
 
     log.info("Using backend '%s'", backend)
-    if backend == 'screenshare':
-      self.fbworker = ScreenShareStream(ssh)
+    if backend.startswith('screenshare'):
+      self.fbworker = ScreenShareStream(ssh, auth=backend.endswith('+auth'))
       # does not support key/pointer events
       self.leftAction.setEnabled(False)
       self.rightAction.setEnabled(False)
